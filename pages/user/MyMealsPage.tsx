@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Meal, MealCategory, UserMealSelection, User } from '../../types';
 import { useAuth } from '../../Auth';
@@ -51,7 +52,6 @@ const MealCard: React.FC<{ meal: Meal; isSelected: boolean; isFavorite: boolean;
 const MyMealsPage: React.FC = () => {
     const { user } = useAuth();
     const { dailyMenu, userSelections, updateUserSelections, meals: allMeals, togglePauseDay, toggleFavoriteMeal } = useData();
-    // Fix: Cast user to User as this page is for subscribers only.
     const currentUser = user as User;
     const subscription = currentUser?.subscription;
     const scrollContainerRef = useRef<HTMLDivElement>(null);

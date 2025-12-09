@@ -11,14 +11,12 @@ const DiscountManagement: React.FC = () => {
   const [selectedCode, setSelectedCode] = useState<DiscountCode | null>(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
-  // Fix: Use state to manage the "all packages" checkbox
   const [allPackagesChecked, setAllPackagesChecked] = useState(false);
 
   const handleAddClick = () => {
     setModalMode('add');
     setSelectedCode(null);
     setSelectedPackages([]);
-    // Fix: Initialize checkbox state
     setAllPackagesChecked(false);
     setIsModalOpen(true);
   };
@@ -27,7 +25,6 @@ const DiscountManagement: React.FC = () => {
     setModalMode('edit');
     setSelectedCode(code);
     setSelectedPackages(code.applicablePackageIds || []);
-    // Fix: Initialize checkbox state from existing data
     setAllPackagesChecked(code.applicablePackageIds === null);
     setIsModalOpen(true);
   };

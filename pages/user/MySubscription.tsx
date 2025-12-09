@@ -1,7 +1,7 @@
+
 import React from 'react';
 import { useAuth } from '../../Auth';
 import { useData } from '../../data/DataContext';
-// Fix: Import User for casting
 import { Address, PaymentMethod, PaymentStatus, MealCategory, SubscriptionDuration, User } from '../../types';
 
 
@@ -39,14 +39,13 @@ const AddressDisplay: React.FC<{ address: Address }> = ({ address }) => {
 const MySubscription: React.FC = () => {
   const { user } = useAuth();
   const { packages, discountCodes } = useData();
-  // Fix: Cast user to User to safely access subscription property. This page is for subscribers only.
   const currentUser = user as User;
   const subscription = currentUser?.subscription;
   const selectedPackage = subscription ? packages.find(p => p.id === subscription.packageId) : null;
   const appliedDiscountCode = subscription?.discountCode ? discountCodes.find(d => d.code === subscription.discountCode) : null;
 
 
-  if (!subscription || !user) {
+  if (!subscription || !currentUser) {
     return (
       <div className="text-center">
         <h1 className="text-2xl font-bold">لا يوجد لديك اشتراك فعال.</h1>
@@ -118,11 +117,10 @@ const MySubscription: React.FC = () => {
                     </span>
                 </div>
                 <dl>
-                    <DetailRow label="اسم المشترك" value={user.name} />
+                    <DetailRow label="اسم المشترك" value={currentUser.name} />
                     <div className="py-4 border-b">
                         <dt className="text-md text-gray-600 mb-2">عنوان التوصيل</dt>
-                        {/* Fix: Cast user to User to ensure address is of type Address, not string. */}
-                        <AddressDisplay address={(user as User).address} />
+                        <AddressDisplay address={currentUser.address} />
                     </div>
                     <DetailRow label="خطة الوجبات اليومية" value={mealCompositionText} />
                     <DetailRow label="تاريخ بداية الاشتراك" value={subscription.startDate} />

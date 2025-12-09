@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useData } from '../../data/DataContext';
 import { getTodayDateString } from './reportUtils';
@@ -11,9 +12,8 @@ const VacuumReport: React.FC = () => {
     // We'll report on orders placed today, to be prepared for delivery in 2 days.
     const todaysOrders = vacuumOrders.filter(o => o.orderDate === today);
 
-    // FIX: Explicitly define the accumulator type for `reduce` to ensure correct type inference for `kitchenSummary`.
-    // This resolves errors where properties on `item` were not found because it was inferred as `unknown`.
-    const kitchenSummary = todaysOrders.reduce<Record<string, { packageName: string; marinadeName: string; totalKg: number }>>((summary, order) => {
+    // FIX: Correctly type the initial value for the reduce method to ensure kitchenSummary is properly typed.
+    const kitchenSummary = todaysOrders.reduce((summary, order) => {
         order.items.forEach(item => {
             const key = `${item.packageId}-${item.marinadeId}`;
             if (!summary[key]) {
@@ -31,7 +31,7 @@ const VacuumReport: React.FC = () => {
             }
         });
         return summary;
-    }, {});
+    }, {} as Record<string, { packageName: string; marinadeName: string; totalKg: number }>);
 
     const getFullItemName = (item: VacuumOrderItem) => {
         const pkg = vacuumPackages.find(p => p.id === item.packageId);

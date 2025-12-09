@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Auth';
@@ -9,7 +10,6 @@ const EditProfilePage: React.FC = () => {
     const { updateUser } = useData();
     const navigate = useNavigate();
     
-    // Fix: Cast user to User and provide a full default address object to prevent type errors.
     const currentUser = user as User;
     
     const [formData, setFormData] = useState({

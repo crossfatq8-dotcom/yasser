@@ -118,7 +118,6 @@ const MenuManagement: React.FC = () => {
         calories: Number(formData.get('calories')),
         protein: Number(formData.get('protein')),
         carbs: Number(formData.get('carbs')),
-        // FIX: Add missing 'fat' property
         fat: Number(formData.get('fat')),
       }
     };
@@ -181,7 +180,6 @@ const MenuManagement: React.FC = () => {
           </div>
            <div>
             <label className="block text-sm font-medium text-gray-300">البيانات الغذائية</label>
-            {/* FIX: Add 'fat' input and adjust grid layout */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-1">
                 <input type="number" name="calories" placeholder="السعرات" defaultValue={selectedMeal?.macros?.calories || ''} required className="block w-full bg-gray-600 border-gray-500 rounded-md py-2 px-3 text-white" />
                 <input type="number" name="protein" placeholder="البروتين (g)" defaultValue={selectedMeal?.macros?.protein || ''} required className="block w-full bg-gray-600 border-gray-500 rounded-md py-2 px-3 text-white" />

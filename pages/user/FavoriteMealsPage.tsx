@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useAuth } from '../../Auth';
 import { useData } from '../../data/DataContext';
@@ -33,10 +34,8 @@ const FavoriteMealsPage: React.FC = () => {
     const { user } = useAuth();
     const { meals, toggleFavoriteMeal } = useData();
 
-    if (!user) return null;
-
-    // Fix: Cast user to User to safely access favoriteMealIds.
     const currentUser = user as User;
+    if (!currentUser) return null;
 
     const favoriteMeals = meals.filter(meal => currentUser.favoriteMealIds.includes(meal.id));
 

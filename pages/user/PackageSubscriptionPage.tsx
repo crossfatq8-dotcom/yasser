@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useData } from '../../data/DataContext';
@@ -119,7 +120,6 @@ const PackageSubscriptionPage: React.FC = () => {
             address: formData.address as Address,
             subscription: newSubscription,
             dislikedIngredients: formData.dislikedIngredients,
-            // FIX: Add missing 'favoriteMealIds' property
             favoriteMealIds: [],
         };
         
